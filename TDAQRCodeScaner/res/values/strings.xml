@@ -12,10 +12,27 @@
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  See the License for the specific language governing permissions and
- limitations under the License.
+ limitations under the License.
 -->
 <resources>
 
+    <!-- minhas String's -->
+
+
+    <!-- tela de login -->
+    <string name="bem_vindo">Seja bem vindo(a) ao TDA QR Code</string>
+    <string name="info">Faça seu login aqui</string>
+    <string name="login">Login: </string>
+    <string name="dica_login">Digite seu login</string>
+    <string name="senha">Senha: </string>
+    <string name="dica_senha">Digite sua senha</string>
+    <string name="logar">Logar</string>
+    <string name="limpar">Limpar</string>
+    <string name="sair">Sair</string>
+    <string name="Mostrar_senha">Mostrar senha</string>
+    <string name="manter_conectado">Manter-me conectado</string>
+
+    <!-- tela de scanner -->
     <string name="app_name">TDA QR Code</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -25,9 +42,13 @@
     <string name="title_activity_historico">Histórico</string>
     <string name="leitura">Leitura: </string>
     <string name="voltar">Voltar</string>
+    <string name="historico_vazio">Lista de hitórico está vazia!</string>
     <string name="compartilhar">Compartilhar</string>
     <string name="preferencias">Preferências</string>
     <string name="ajuda">Ajuda</string>
+    <string name="enviar">Enviar</string>
+    <string name="apagar">Apagar</string>
+
     <!-- string name="app_name">Barcode Scanner</string -->
     <string name="app_picker_name">Applications</string>
     <string name="bookmark_picker_name">Bookmarks</string>
@@ -147,5 +168,6 @@
     <string name="wifi_ssid_label">Network Name</string>
     <string name="wifi_type_label">Type</string>
     <string name="title_activity_teste">Teste IMEI</string>
+    <string name="title_activity_activity_login">Login</string>
 
 </resources>

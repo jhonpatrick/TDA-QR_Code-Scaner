@@ -18,6 +18,7 @@ package com.google.zxing.client.android.history;
 
 import java.util.ArrayList;
 
+import model.ScannerQr;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
@@ -32,41 +33,72 @@ import com.google.zxing.Result;
 
 public final class HistoryItemAdapter extends ArrayAdapter<HistoryItem> {
 
-  private final Context activity;
+	private final Context activity;
+	private HistoryManager historyManager;
+	private ScannerQr scanner_qr;
 
-  public HistoryItemAdapter(Context activity) {
-    super(activity, R.layout.history_list_item, new ArrayList<HistoryItem>());
-    this.activity = activity;
-  }
+	public HistoryItemAdapter(Context activity) {
+		super(activity, R.layout.history_list_item,
+				new ArrayList<HistoryItem>());
+		this.activity = activity;
+	}
 
-  @Override
-  public View getView(int position, View view, ViewGroup viewGroup) {
-    View layout;
-    if (view instanceof LinearLayout) {
-      layout = view;
-    } else {
-      LayoutInflater factory = LayoutInflater.from(activity);
-      layout = factory.inflate(R.layout.history_list_item, viewGroup, false);
-    }
+	@Override
+	public View getView(int position, View view, ViewGroup viewGroup) {
+		View layout;
+		if (view instanceof LinearLayout) {
+			layout = view;
+		} else {
+			LayoutInflater factory = LayoutInflater.from(activity);
+			layout = factory.inflate(R.layout.history_list_item, viewGroup,
+					false);
+		}
 
-    HistoryItem item = getItem(position);
-    Result result = item.getResult();
+		HistoryItem item = getItem(position);
+		Result result = item.getResult();
 
-    CharSequence title;
-    CharSequence detail;
-    if (result != null) {
-      title = result.getText();
-      detail = item.getDisplayAndDetails();      
-    } else {
-      Resources resources = getContext().getResources();
-      title = resources.getString(R.string.history_empty);
-      detail = resources.getString(R.string.history_empty_detail);
-    }
+		CharSequence title;
+		CharSequence detail;
+		if (result != null) {
+			title = result.getText();
+			detail = item.getDisplayAndDetails();
+		} else {
+			Resources resources = getContext().getResources();
+			title = resources.getString(R.string.history_empty);
+			detail = resources.getString(R.string.historico_vazio);
+		}
 
-    ((TextView) layout.findViewById(R.id.history_title)).setText(title);    
-    ((TextView) layout.findViewById(R.id.history_detail)).setText(detail);
+		((TextView) layout.findViewById(R.id.history_title)).setText(title);
+		((TextView) layout.findViewById(R.id.history_detail)).setText(detail);
 
-    return layout;
-  }
+		return layout;
+	}
 
+	/*public void apagar_dados(View view) {
+		AlertDialog.Builder builder = new AlertDialog.Builder();
+		builder.setMessage(R.string.msg_sure);
+		builder.setCancelable(true);
+		builder.setPositiveButton(R.string.button_ok,
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int i2) {
+						historyManager.clearHistory();
+						dialog.dismiss();
+						//finish();
+					}
+				});
+		builder.setNegativeButton(R.string.button_cancel, null);
+		builder.show();
+	}*/
+	
+	public void enviar_dados(View view){
+		//web Service
+		
+		
+	}
+	
+	//fazer busca no banco de dados primeiro....
+	
+	
+	
 }

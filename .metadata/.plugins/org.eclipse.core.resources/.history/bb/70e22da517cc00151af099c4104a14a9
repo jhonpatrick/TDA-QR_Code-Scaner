@@ -77,7 +77,7 @@ public class Scaner {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Scaner other = (Scaner) obj;
+		ScanerQr other = (ScanerQr) obj;
 		if (id != other.id)
 			return false;
 		return true;

@@ -107,60 +107,61 @@ public final class HistoryActivity extends ListActivity {
     return true;
   }
 
-//  @Override
-//  public boolean onCreateOptionsMenu(Menu menu) {
-//    if (historyManager.hasHistoryItems()) {
-//      MenuInflater menuInflater = getMenuInflater();
-//      menuInflater.inflate(R.menu.history, menu);
-//    }
-//    return super.onCreateOptionsMenu(menu);
-//  }
-//
-//  @Override
-//  public boolean onOptionsItemSelected(MenuItem item) {
-//    switch (item.getItemId()) {
-//      case R.id.menu_history_send:
-//        CharSequence history = historyManager.buildHistory();
-//        Parcelable historyFile = HistoryManager.saveHistory(history.toString());
-//        if (historyFile == null) {
-//          AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//          builder.setMessage(R.string.msg_unmount_usb);
-//          builder.setPositiveButton(R.string.button_ok, null);
-//          builder.show();
-//        } else {
-//          Intent intent = new Intent(Intent.ACTION_SEND, Uri.parse("mailto:"));
-//          intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-//          String subject = getResources().getString(R.string.history_email_title);
-//          intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-//          intent.putExtra(Intent.EXTRA_TEXT, subject);
-//          intent.putExtra(Intent.EXTRA_STREAM, historyFile);
-//          intent.setType("text/csv");
-//          try {
-//            startActivity(intent);
-//          } catch (ActivityNotFoundException anfe) {
-//            Log.w(TAG, anfe.toString());
-//          }
-//        }
-//        break;
-//      case R.id.menu_history_clear_text:
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setMessage(R.string.msg_sure);
-//        builder.setCancelable(true);
-//        builder.setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
-//          @Override
-//          public void onClick(DialogInterface dialog, int i2) {
-//            historyManager.clearHistory();
-//            dialog.dismiss();
-//            finish();
-//          }
-//        });
-//        builder.setNegativeButton(R.string.button_cancel, null);
-//        builder.show();
-//        break;
-//      default:
-//        return super.onOptionsItemSelected(item);
-//    }
-//    return true;
-//  }
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    if (historyManager.hasHistoryItems()) {
+      MenuInflater menuInflater = getMenuInflater();
+      menuInflater.inflate(R.menu.history, menu);
+    }
+    return super.onCreateOptionsMenu(menu);
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.menu_history_send:
+        CharSequence history = historyManager.buildHistory();
+        Parcelable historyFile = HistoryManager.saveHistory(history.toString());
+        if (historyFile == null) {
+          AlertDialog.Builder builder = new AlertDialog.Builder(this);
+          builder.setMessage(R.string.msg_unmount_usb);
+          builder.setPositiveButton(R.string.button_ok, null);
+          builder.show();
+        } else {
+        	// mudando o email para tda
+          Intent intent = new Intent(Intent.ACTION_SEND, Uri.parse("tda:"));
+          intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+          String subject = getResources().getString(R.string.history_email_title);
+          intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+          intent.putExtra(Intent.EXTRA_TEXT, subject);
+          intent.putExtra(Intent.EXTRA_STREAM, historyFile);
+          intent.setType("text/csv");
+          try {
+            startActivity(intent);
+          } catch (ActivityNotFoundException anfe) {
+            Log.w(TAG, anfe.toString());
+          }
+        }
+        break;
+      case R.id.menu_history_clear_text:
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.msg_sure);
+        builder.setCancelable(true);
+        builder.setPositiveButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+          @Override
+          public void onClick(DialogInterface dialog, int i2) {
+            historyManager.clearHistory();
+            dialog.dismiss();
+            finish();
+          }
+        });
+        builder.setNegativeButton(R.string.button_cancel, null);
+        builder.show();
+        break;
+      default:
+        return super.onOptionsItemSelected(item);
+    }
+    return true;
+  }
 
 }

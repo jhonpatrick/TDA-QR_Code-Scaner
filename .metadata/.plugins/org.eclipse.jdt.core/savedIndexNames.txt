@@ -1,0 +1,7 @@
+INDEX VERSION 1.126+C:\Users\MarcosJr\Desktop\TDA-QR_Code-Scaner\.metadata\.plugins\org.eclipse.jdt.core
+266660992.index
+3241483364.index
+292204579.index
+3935378393.index
+103400560.index
+1887773253.index

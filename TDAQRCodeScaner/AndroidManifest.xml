@@ -27,8 +27,9 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:name="br.com.tdaqrcodescaner.ActivityLogin"
+             android:label="@string/app_name"
+             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,7 +39,7 @@
         <activity
             android:name="com.google.zxing.client.android.CaptureActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="landscape"
+            android:screenOrientation="fullSensor"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:windowSoftInputMode="stateAlwaysHidden" >
             <intent-filter>
@@ -50,7 +51,7 @@
         <activity
             android:name="com.google.zxing.client.android.history.HistoryActivity"
             android:label="@string/title_activity_historico"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="fullSensor" >
         </activity>
         <!--
         <activity 
@@ -67,9 +68,13 @@
             android:name="com.google.zxing.client.android.HelpActivity"
             android:label="@string/ajuda"
             android:screenOrientation="portrait">
-        </activity>
+        </activity>
         -->
-
+        <activity
+            android:name="br.com.tdaqrcodescaner.MainActivity"
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

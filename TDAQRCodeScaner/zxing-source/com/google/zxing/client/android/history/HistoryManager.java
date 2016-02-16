@@ -49,24 +49,37 @@ import java.util.List;
  *
  * @author Sean Owen
  */
+
+/*
+ * algumas coisas foram mudadas aqui neste classe, 
+ * interação com estrema cautela, 
+ * confererir se todos os dados estão corretos.
+ * Está faltando a criação de algumas colunas e a edição de alguns metodos.
+ */
 public final class HistoryManager {
 
   private static final String TAG = HistoryManager.class.getSimpleName();
+  //mudando TABLE_NAME p TABELA
 
   private static final int MAX_ITEMS = 2000;
 
   private static final String[] COLUMNS = {
-      DBHelper.TEXT_COL,
+	  //acresçentando mais colunas
+      //DBHelper.TEXT_COL,
+	  DBHelper.QR_CODE,
+      //DBHelper.FORMAT_COL,
+      DBHelper.DATA_LEITURA,
+      DBHelper.IMEI_CEL,
       DBHelper.DISPLAY_COL,
-      DBHelper.FORMAT_COL,
       DBHelper.TIMESTAMP_COL,
       DBHelper.DETAILS_COL,
   };
 
   private static final String[] COUNT_COLUMN = { "COUNT(1)" };
 
-  private static final String[] ID_COL_PROJECTION = { DBHelper.ID_COL };
-  private static final String[] ID_DETAIL_COL_PROJECTION = { DBHelper.ID_COL, DBHelper.DETAILS_COL };
+  //mudando o ID_COL pq ID
+  private static final String[] ID_PROJECTION = { DBHelper.ID };
+  private static final String[] ID_DETAIL_COL_PROJECTION = { DBHelper.ID, DBHelper.DETAILS_COL };
   private static final DateFormat EXPORT_DATE_TIME_FORMAT =
       DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
 
@@ -82,7 +95,7 @@ public final class HistoryManager {
     Cursor cursor = null;
     try {
       db = helper.getReadableDatabase();
-      cursor = db.query(DBHelper.TABLE_NAME, COUNT_COLUMN, null, null, null, null, null);
+      cursor = db.query(DBHelper.TABELA, COUNT_COLUMN, null, null, null, null, null);
       cursor.moveToFirst();
       return cursor.getInt(0) > 0;
     } finally {
@@ -97,7 +110,7 @@ public final class HistoryManager {
     Cursor cursor = null;
     try {
       db = helper.getReadableDatabase();
-      cursor = db.query(DBHelper.TABLE_NAME, COLUMNS, null, null, null, null, DBHelper.TIMESTAMP_COL + " DESC");
+      cursor = db.query(DBHelper.TABELA, COLUMNS, null, null, null, null, DBHelper.TIMESTAMP_COL + " DESC");
       while (cursor.moveToNext()) {
         String text = cursor.getString(0);
         String display = cursor.getString(1);
@@ -119,7 +132,7 @@ public final class HistoryManager {
     Cursor cursor = null;
     try {
       db = helper.getReadableDatabase();
-      cursor = db.query(DBHelper.TABLE_NAME, COLUMNS, null, null, null, null, DBHelper.TIMESTAMP_COL + " DESC");
+      cursor = db.query(DBHelper.TABELA, COLUMNS, null, null, null, null, DBHelper.TIMESTAMP_COL + " DESC");
       cursor.move(number + 1);
       String text = cursor.getString(0);
       String display = cursor.getString(1);
@@ -139,12 +152,12 @@ public final class HistoryManager {
     Cursor cursor = null;
     try {
       db = helper.getWritableDatabase();      
-      cursor = db.query(DBHelper.TABLE_NAME,
-                        ID_COL_PROJECTION,
+      cursor = db.query(DBHelper.TABELA,
+                        ID_PROJECTION,
                         null, null, null, null,
                         DBHelper.TIMESTAMP_COL + " DESC");
       cursor.move(number + 1);
-      db.delete(DBHelper.TABLE_NAME, DBHelper.ID_COL + '=' + cursor.getString(0), null);
+      db.delete(DBHelper.TABELA, DBHelper.ID + '=' + cursor.getString(0), null);
     } finally {
       close(cursor, db);
     }
@@ -164,8 +177,9 @@ public final class HistoryManager {
     }
 
     ContentValues values = new ContentValues();
-    values.put(DBHelper.TEXT_COL, result.getText());
-    values.put(DBHelper.FORMAT_COL, result.getBarcodeFormat().toString());
+    values.put(DBHelper.QR_CODE, result.getText());
+    //values.put(DBHelper.FORMAT_COL, result.getBarcodeFormat().toString());
+    
     values.put(DBHelper.DISPLAY_COL, handler.getDisplayContents().toString());
     values.put(DBHelper.TIMESTAMP_COL, System.currentTimeMillis());
 
@@ -174,7 +188,7 @@ public final class HistoryManager {
     try {
       db = helper.getWritableDatabase();      
       // Insert the new entry into the DB.
-      db.insert(DBHelper.TABLE_NAME, DBHelper.TIMESTAMP_COL, values);
+      db.insert(DBHelper.TABELA, DBHelper.TIMESTAMP_COL, values);
     } finally {
       close(null, db);
     }
@@ -188,9 +202,9 @@ public final class HistoryManager {
     Cursor cursor = null;
     try {
       db = helper.getWritableDatabase();
-      cursor = db.query(DBHelper.TABLE_NAME,
+      cursor = db.query(DBHelper.TABELA,
                         ID_DETAIL_COL_PROJECTION,
-                        DBHelper.TEXT_COL + "=?",
+                        DBHelper.QR_CODE + "=?",
                         new String[] { itemID },
                         null,
                         null,
@@ -215,7 +229,7 @@ public final class HistoryManager {
         if (newDetails != null) {
           ContentValues values = new ContentValues();
           values.put(DBHelper.DETAILS_COL, newDetails);
-          db.update(DBHelper.TABLE_NAME, values, DBHelper.ID_COL + "=?", new String[] { oldID });
+          db.update(DBHelper.TABELA, values, DBHelper.ID + "=?", new String[] { oldID });
         }
       }
 
@@ -229,7 +243,7 @@ public final class HistoryManager {
     SQLiteDatabase db = null;
     try {
       db = helper.getWritableDatabase();      
-      db.delete(DBHelper.TABLE_NAME, DBHelper.TEXT_COL + "=?", new String[] { text });
+      db.delete(DBHelper.TABELA, DBHelper.QR_CODE + "=?", new String[] { text });
     } finally {
       close(null, db);
     }
@@ -241,15 +255,15 @@ public final class HistoryManager {
     Cursor cursor = null;
     try {
       db = helper.getWritableDatabase();      
-      cursor = db.query(DBHelper.TABLE_NAME,
-                        ID_COL_PROJECTION,
+      cursor = db.query(DBHelper.TABELA,
+                        ID_PROJECTION,
                         null, null, null, null,
                         DBHelper.TIMESTAMP_COL + " DESC");
       cursor.move(MAX_ITEMS);
       while (cursor.moveToNext()) {
         String id = cursor.getString(0);
         Log.i(TAG, "Deleting scan history ID " + id);
-        db.delete(DBHelper.TABLE_NAME, DBHelper.ID_COL + '=' + id, null);
+        db.delete(DBHelper.TABELA, DBHelper.ID + '=' + id, null);
       }
     } catch (SQLiteException sqle) {
       // We're seeing an error here when called in CaptureActivity.onCreate() in rare cases
@@ -281,7 +295,7 @@ public final class HistoryManager {
     Cursor cursor = null;
     try {
       db = helper.getWritableDatabase();
-      cursor = db.query(DBHelper.TABLE_NAME,
+      cursor = db.query(DBHelper.TABELA,
                         COLUMNS,
                         null, null, null, null,
                         DBHelper.TIMESTAMP_COL + " DESC");
@@ -314,7 +328,7 @@ public final class HistoryManager {
     SQLiteDatabase db = null;
     try {
       db = helper.getWritableDatabase();      
-      db.delete(DBHelper.TABLE_NAME, null, null);
+      db.delete(DBHelper.TABELA, null, null);
     } finally {
       close(null, db);
     }

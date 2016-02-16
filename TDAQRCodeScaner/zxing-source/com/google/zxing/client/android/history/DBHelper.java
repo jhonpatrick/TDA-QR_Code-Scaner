@@ -25,6 +25,8 @@ import android.content.Context;
  */
 final class DBHelper extends SQLiteOpenHelper {
 
+ /* 
+  * 
   private static final int DB_VERSION = 5;
   private static final String DB_NAME = "barcode_scanner_history.db";
   static final String TABLE_NAME = "history";
@@ -34,14 +36,31 @@ final class DBHelper extends SQLiteOpenHelper {
   static final String DISPLAY_COL = "display";
   static final String TIMESTAMP_COL = "timestamp";
   static final String DETAILS_COL = "details";
+  *
+  */
+	//criando meu banco de dados
+	
+	public static final String NOME_BANCO = "tda_eventos.db";
+	public static final String TABELA = "scaner";
+	//id da inscrição
+	public static final String ID = "_id";
+	//numero da inscrição que vai ser mandada pra o servidor da tda
+	public static final String QR_CODE = "qrcode";
+	public static final String DATA_LEITURA = "data_leitura";
+	public static final String IMEI_CEL = "imei_cel";
+	static final String TIMESTAMP_COL = "timestamp";
+	static final String DISPLAY_COL = "display";
+	static final String DETAILS_COL = "details";
+	public static final int VERSAO = 1;
 
   DBHelper(Context context) {
-    super(context, DB_NAME, null, DB_VERSION);
+    //super(context, DB_NAME, null, DB_VERSION);
+	  super(context, NOME_BANCO, null,	VERSAO);
   }
 
   @Override
   public void onCreate(SQLiteDatabase sqLiteDatabase) {
-    sqLiteDatabase.execSQL(
+   /* sqLiteDatabase.execSQL(
             "CREATE TABLE " + TABLE_NAME + " (" +
             ID_COL + " INTEGER PRIMARY KEY, " +
             TEXT_COL + " TEXT, " +
@@ -49,11 +68,22 @@ final class DBHelper extends SQLiteOpenHelper {
             DISPLAY_COL + " TEXT, " +
             TIMESTAMP_COL + " INTEGER, " +
             DETAILS_COL + " TEXT);");
+            */
+	  sqLiteDatabase.execSQL(
+			  "CREATE TABLE " + TABELA + " (" +
+	            ID + " INTEGER PRIMARY KEY, " +
+	            QR_CODE + " TEXT, " +
+	            DATA_LEITURA + " dateTime, " +
+	            IMEI_CEL + "TEXT"+
+	            DISPLAY_COL + " TEXT, " +
+	            TIMESTAMP_COL + " INTEGER, " +
+	            DETAILS_COL + " TEXT);");
   }
 
   @Override
   public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-    sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+    //sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+	  sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABELA);
     onCreate(sqLiteDatabase);
   }
 

@@ -3,7 +3,7 @@ package dao;
 import java.util.Date;
 import java.util.List;
 
-import model.Scaner;
+import model.ScannerQr;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -50,24 +50,24 @@ public class BancoDAO{
 			return "Registro de leitura inserido com sucesso";
 	}
 
-	public void deletar(Scaner insc) {
+	public void deletar(ScannerQr insc) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void atualiza(Scaner insc) {
+	public void atualiza(ScannerQr insc) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public Scaner consultar(long id) {
+	public ScannerQr consultar(long id) {
 		// TODO Auto-generated method stub
-		String query = "";
+		String query = "Select _id from ScannerQr";
 		
 		return null;
 	}
 
-	public List<Scaner> listar() {
+	public List<ScannerQr> listar() {
 		// TODO Auto-generated method stub
 		return null;
 	}
