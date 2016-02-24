@@ -1,0 +1,14 @@
+package dao;
+
+import model.ScannerQr;
+
+
+
+public class ScannerDAO {
+	
+	
+	public void inserir(ScannerQr sqr){ 
+		
+		
+	}
+}

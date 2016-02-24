@@ -1,12 +1,10 @@
 package model;
 
-import java.util.Date;
 
 public class ScannerQr {
 
-	private String qr_code;
 	private long id;
-	private Date data_leitura;
+	private String qr_code;
 	private long imei_cel;
 	
 	public ScannerQr() {
@@ -14,27 +12,17 @@ public class ScannerQr {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ScannerQr(String qr_code, long id, Date data_leitura, long imei_cel) {
+	public ScannerQr(long id, String qr_code, long imei_cel) {
 		super();
-		this.qr_code = qr_code;
 		this.id = id;
-		this.data_leitura = data_leitura;
+		this.qr_code = qr_code;
 		this.imei_cel = imei_cel;
 	}
 
-	public ScannerQr(String qr_code, Date data_leitura, long imei_cel) {
+	public ScannerQr(String qr_code, long imei_cel) {
 		super();
 		this.qr_code = qr_code;
-		this.data_leitura = data_leitura;
 		this.imei_cel = imei_cel;
-	}
-
-	public String getQr_code() {
-		return qr_code;
-	}
-
-	public void setQr_code(String qr_code) {
-		this.qr_code = qr_code;
 	}
 
 	public long getId() {
@@ -45,12 +33,12 @@ public class ScannerQr {
 		this.id = id;
 	}
 
-	public Date getData_leitura() {
-		return data_leitura;
+	public String getQr_code() {
+		return qr_code;
 	}
 
-	public void setData_leitura(Date data_leitura) {
-		this.data_leitura = data_leitura;
+	public void setQr_code(String qr_code) {
+		this.qr_code = qr_code;
 	}
 
 	public long getImei_cel() {
@@ -85,7 +73,8 @@ public class ScannerQr {
 
 	@Override
 	public String toString() {
-		return "ScannerQr [ qr_code = " + qr_code + ", id = " + id + ", data_leitura = "
-				+ data_leitura + ", imei_cel = " + imei_cel + " ]";
+		return "ScannerQr [id=" + id + ", qr_code=" + qr_code + ", imei_cel="
+				+ imei_cel + "]";
 	}
+
 }

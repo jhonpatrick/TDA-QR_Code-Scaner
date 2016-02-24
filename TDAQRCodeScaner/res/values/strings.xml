@@ -42,12 +42,14 @@
     <string name="title_activity_historico">Histórico</string>
     <string name="leitura">Leitura: </string>
     <string name="voltar">Voltar</string>
-    <string name="historico_vazio">Lista de hitórico está vazia!</string>
+    <string name="historico_vazio">Lista de histórico está vazia!</string>
     <string name="compartilhar">Compartilhar</string>
     <string name="preferencias">Preferências</string>
     <string name="ajuda">Ajuda</string>
     <string name="enviar">Enviar</string>
     <string name="apagar">Apagar</string>
+    
+    <string name="nao_implementado">Função não implementada.</string>
 
     <!-- string name="app_name">Barcode Scanner</string -->
     <string name="app_picker_name">Applications</string>

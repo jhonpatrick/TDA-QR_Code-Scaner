@@ -82,7 +82,8 @@ public class ActivityLogin extends Activity {
 
 	public void limpar(View view) {
 		// limpando os componentes
-		if (login.equals("") || login == null && senha.equals("") || senha == null) {
+		if (login.equals("") || login == null && senha.equals("")
+				|| senha == null) {
 
 			Toast.makeText(ActivityLogin.this,
 					"Campos vazios!" + "\n" + "Por favor, preencha os campos.",
@@ -112,7 +113,13 @@ public class ActivityLogin extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int arg1) {
 				// TODO Auto-generated method stub
-				finish();
+				
+				try {
+					finalize();
+				} catch (Throwable e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		// se clicar em Não
@@ -142,13 +149,15 @@ public class ActivityLogin extends Activity {
 				// TODO Auto-generated method stub
 				Object o = new PasswordTransformationMethod();
 				if (isChecked) {
-					senha.setTransformationMethod(null);
+					cbxMostarSeha.setTransformationMethod(null);
 				} else {
-					
-					senha.setTransformationMethod((TransformationMethod) o);
+
+					cbxMostarSeha
+							.setTransformationMethod((TransformationMethod) o);
 				}
 			}
 		});
+		
 	}
 
 	public void manterConectado() {

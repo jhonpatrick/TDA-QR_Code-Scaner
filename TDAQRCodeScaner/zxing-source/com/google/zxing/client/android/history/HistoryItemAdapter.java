@@ -18,13 +18,13 @@ package com.google.zxing.client.android.history;
 
 import java.util.ArrayList;
 
-import model.ScannerQr;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import br.com.tdaqrcodescaner.R;
@@ -34,8 +34,6 @@ import com.google.zxing.Result;
 public final class HistoryItemAdapter extends ArrayAdapter<HistoryItem> {
 
 	private final Context activity;
-	private HistoryManager historyManager;
-	private ScannerQr scanner_qr;
 
 	public HistoryItemAdapter(Context activity) {
 		super(activity, R.layout.history_list_item,
@@ -70,12 +68,14 @@ public final class HistoryItemAdapter extends ArrayAdapter<HistoryItem> {
 
 		((TextView) layout.findViewById(R.id.history_title)).setText(title);
 		((TextView) layout.findViewById(R.id.history_detail)).setText(detail);
+//		((Button) layout.findViewById(R.id.bnt_enviar)).setText(R.string.enviar);
+//		((Button) layout.findViewById(R.id.bnt_apagar)).setText(R.string.apagar);
 
 		return layout;
 	}
 
 	/*public void apagar_dados(View view) {
-		AlertDialog.Builder builder = new AlertDialog.Builder();
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setMessage(R.string.msg_sure);
 		builder.setCancelable(true);
 		builder.setPositiveButton(R.string.button_ok,
@@ -90,15 +90,5 @@ public final class HistoryItemAdapter extends ArrayAdapter<HistoryItem> {
 		builder.setNegativeButton(R.string.button_cancel, null);
 		builder.show();
 	}*/
-	
-	public void enviar_dados(View view){
-		//web Service
-		
-		
-	}
-	
-	//fazer busca no banco de dados primeiro....
-	
-	
 	
 }

@@ -7,5 +7,7 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="zxing-source"/>
 	<classpathentry kind="lib" path="libs/core-2.3.0.jar"/>
+	<classpathentry kind="lib" path="libs/apache-mime4j-0.6.jar"/>
+	<classpathentry kind="lib" path="libs/httpmime-4.1.1.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

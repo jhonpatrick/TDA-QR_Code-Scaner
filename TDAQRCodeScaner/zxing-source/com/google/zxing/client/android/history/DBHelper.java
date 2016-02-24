@@ -46,8 +46,6 @@ final class DBHelper extends SQLiteOpenHelper {
 	public static final String ID = "_id";
 	//numero da inscrição que vai ser mandada pra o servidor da tda
 	public static final String QR_CODE = "qrcode";
-	public static final String DATA_LEITURA = "data_leitura";
-	public static final String IMEI_CEL = "imei_cel";
 	static final String TIMESTAMP_COL = "timestamp";
 	static final String DISPLAY_COL = "display";
 	static final String DETAILS_COL = "details";
@@ -73,8 +71,6 @@ final class DBHelper extends SQLiteOpenHelper {
 			  "CREATE TABLE " + TABELA + " (" +
 	            ID + " INTEGER PRIMARY KEY, " +
 	            QR_CODE + " TEXT, " +
-	            DATA_LEITURA + " dateTime, " +
-	            IMEI_CEL + "TEXT"+
 	            DISPLAY_COL + " TEXT, " +
 	            TIMESTAMP_COL + " INTEGER, " +
 	            DETAILS_COL + " TEXT);");

@@ -1,0 +1,17 @@
+package br.com.tdaqrcodescaner;
+
+import model.ScannerQr;
+
+
+
+public class ScannerDAO {
+	
+	
+	public void inserir(ScannerQr sqr){ 
+		
+		
+	}
+	
+	
+
+}

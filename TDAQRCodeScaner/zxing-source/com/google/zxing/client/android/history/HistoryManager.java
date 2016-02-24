@@ -68,8 +68,6 @@ public final class HistoryManager {
       //DBHelper.TEXT_COL,
 	  DBHelper.QR_CODE,
       //DBHelper.FORMAT_COL,
-      DBHelper.DATA_LEITURA,
-      DBHelper.IMEI_CEL,
       DBHelper.DISPLAY_COL,
       DBHelper.TIMESTAMP_COL,
       DBHelper.DETAILS_COL,
@@ -112,12 +110,13 @@ public final class HistoryManager {
       db = helper.getReadableDatabase();
       cursor = db.query(DBHelper.TABELA, COLUMNS, null, null, null, null, DBHelper.TIMESTAMP_COL + " DESC");
       while (cursor.moveToNext()) {
-        String text = cursor.getString(0);
+        //String text = cursor.getString(0);
+    	String qrcode = cursor.getString(0);
         String display = cursor.getString(1);
         String format = cursor.getString(2);
         long timestamp = cursor.getLong(3);
         String details = cursor.getString(4);
-        Result result = new Result(text, null, null, BarcodeFormat.valueOf(format), timestamp);
+        Result result = new Result(qrcode, null, null, BarcodeFormat.valueOf(format), timestamp);
         items.add(new HistoryItem(result, display, details));
       }
     } finally {
@@ -134,12 +133,13 @@ public final class HistoryManager {
       db = helper.getReadableDatabase();
       cursor = db.query(DBHelper.TABELA, COLUMNS, null, null, null, null, DBHelper.TIMESTAMP_COL + " DESC");
       cursor.move(number + 1);
-      String text = cursor.getString(0);
+      //String text = cursor.getString(0);
+      String qrcode = cursor.getString(0);
       String display = cursor.getString(1);
       String format = cursor.getString(2);
       long timestamp = cursor.getLong(3);
       String details = cursor.getString(4);
-      Result result = new Result(text, null, null, BarcodeFormat.valueOf(format), timestamp);
+      Result result = new Result(qrcode, null, null, BarcodeFormat.valueOf(format), timestamp);
       return new HistoryItem(result, display, details);
     } finally {
       close(cursor, db);
@@ -163,6 +163,7 @@ public final class HistoryManager {
     }
   }
 
+  
   public void addHistoryItem(Result result, ResultHandler handler) {
     // Do not save this item to the history if the preference is turned off, or the contents are
     // considered secure.
@@ -179,6 +180,7 @@ public final class HistoryManager {
     ContentValues values = new ContentValues();
     values.put(DBHelper.QR_CODE, result.getText());
     //values.put(DBHelper.FORMAT_COL, result.getBarcodeFormat().toString());
+      
     
     values.put(DBHelper.DISPLAY_COL, handler.getDisplayContents().toString());
     values.put(DBHelper.TIMESTAMP_COL, System.currentTimeMillis());
@@ -373,5 +375,8 @@ public final class HistoryManager {
       database.close();
     }
   }
+  
+  
+  
 
 }

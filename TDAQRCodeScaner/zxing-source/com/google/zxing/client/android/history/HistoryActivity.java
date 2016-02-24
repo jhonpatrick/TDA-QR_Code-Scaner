@@ -34,13 +34,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import br.com.tdaqrcodescaner.R;
 
 import com.google.zxing.client.android.CaptureActivity;
-import com.google.zxing.client.android.HelpActivity;
 import com.google.zxing.client.android.Intents;
-import com.google.zxing.client.android.PreferencesActivity;
-import com.google.zxing.client.android.share.ShareActivity;
 
 public final class HistoryActivity extends ListActivity {
 
@@ -119,7 +117,14 @@ public final class HistoryActivity extends ListActivity {
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-      case R.id.menu_history_send:
+      case R.id.ic_menu_upload:
+    	  
+    	  /*
+    	   * 
+    	   * subir todos os  
+    	   * 
+    	   */
+    	  
         CharSequence history = historyManager.buildHistory();
         Parcelable historyFile = HistoryManager.saveHistory(history.toString());
         if (historyFile == null) {
@@ -142,6 +147,7 @@ public final class HistoryActivity extends ListActivity {
             Log.w(TAG, anfe.toString());
           }
         }
+    	  Toast.makeText(this, R.string.nao_implementado, Toast.LENGTH_LONG).show();
         break;
       case R.id.menu_history_clear_text:
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

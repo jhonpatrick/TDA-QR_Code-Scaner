@@ -39,8 +39,8 @@
         <activity
             android:name="com.google.zxing.client.android.CaptureActivity"
             android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="fullSensor"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden" >
             <intent-filter>
                 <action android:name="com.google.zxing.client.android.SCAN" />
@@ -70,9 +70,9 @@
             android:screenOrientation="portrait">
         </activity>
         -->
-        <activity
+        <activity 
             android:name="br.com.tdaqrcodescaner.MainActivity"
-            android:label="@string/app_name" 
+            android:label="@string/app_name"
             android:screenOrientation="portrait">
         </activity>
     </application>
